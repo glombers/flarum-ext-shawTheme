@@ -9,11 +9,9 @@ return function (Dispatcher $events) {
             $event->addAssets([
                 __DIR__ . '/js/forum/dist/extension.js',
                 __DIR__ . '/less/forum/extension.less',
+                __DIR__ . '/views/forum.blade.php',
             ]);
             $event->addBootstrapper('romanzpolski/shawTheme/main');
         }
-    });
-    $events->listen(PostWillBeSaved::class, function (PostWillBeSaved $event) {
-        $event->post->content = 'This is not what I wrote!';
     });
 };
