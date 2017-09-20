@@ -1,4 +1,5 @@
 import { extend } from 'flarum/extend';
+import app from 'flarum/app';
 import Post from 'flarum/components/Post';
 import Component from 'flarum/Component';
 import Page from 'flarum/components/Page';
@@ -21,8 +22,7 @@ import username from 'flarum/helpers/username';
 import listInline from 'romanzpolski/shawTheme/listInline';
 
 
-
-app.initializers.add('romanzpolski/shawTheme', () => {
+app.initializers.add('romanzpolski/shawTheme', app => {
 
 
 
@@ -175,8 +175,8 @@ app.initializers.add('romanzpolski/shawTheme', () => {
 
 
     IndexPage.prototype.view = function() {
-        console.log(this.sidebarItems().toArray());
-//        console.log(this.viewItems().toArray());
+        //console.log(this.sidebarItems().toArray());
+        console.log(this.viewItems().toArray());
         return (
             <div className="IndexPage">
                 {this.hero()}

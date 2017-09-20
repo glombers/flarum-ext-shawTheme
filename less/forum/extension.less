@@ -18,6 +18,20 @@
 // Derive the primary/secondary colors from the config variables. In dark mode,
 // we make the user-set colors a bit darker, otherwise they will stand out too
 // much.
+
+@color:                            #000;
+.placeholder(@color: @placeholderText) {
+  &:-moz-placeholder {
+    color: @color;
+  }
+  &:-ms-input-placeholder {
+    color: @color;
+  }
+  &::-webkit-input-placeholder {
+    color: @color;
+  }
+}
+
 .define-colors(@config-dark-mode);
 .define-colors(false) {
   @primary-color:                  @config-primary-color;
@@ -53,7 +67,7 @@
   @muted-more-color:               hsl(@secondary-hue, min(10%, @secondary-sat), 40%);
   @shadow-color:                   rgba(0, 0, 0, 0.5);
 
-  @control-bg:                     #F2F3F3;
+  @control-bg:                     hsl(@secondary-hue, min(15%, @secondary-sat), 50%);
   @control-color:                  @muted-color;
   @control-danger-bg:              #411;
   @control-danger-color:           #a88;
@@ -81,15 +95,16 @@
 .define-header(false) {
   @header-bg:                      #4FA4CE;
   @header-color:                   #fff;
-  @header-control-bg:              #fff;
-  @header-control-color:           #fff;
-}
-.define-header(true) {
-  @header-bg:                      #4FA4CE;
-  @header-color:                   @body-bg;
-  @header-control-bg:              #000;
+  @header-control-bg:              @muted-color;
   @header-control-color:           #000;
 }
+.define-header(true) {
+  @header-bg:                      #fff;
+  @header-color:                   #fff;
+  @header-control-bg:              @muted-color;
+  @header-control-color:           #000;
+}
+@header-button-color:              #cbe4f0;
 
 // ---------------------------------
 // LAYOUT
@@ -168,9 +183,7 @@
   }
 }
 .Header-navigation {
-  float: left;
-  margin-right: 25px;
-  margin-top: 8px;
+
 }
 .Header-controls {
   margin: 4px;
@@ -226,3 +239,37 @@ body .SessionDropdown .Dropdown-toggle {
     }
   }
 }
+#header {
+  #header-navigation {
+    a.Button.Navigation-back {
+      background: #4995ba;
+      color: @header-button-color;
+    }
+  }
+  .Header-controls {
+    .Search-input {
+      color: #fff;
+    }
+    input.FormControl {
+      background: #4995ba;
+      color: @header-button-color;
+    }
+    .item-flags, .item-notifications {
+      &:hover {
+        border-radius: 50%;
+      }
+    }
+    .Button {
+      background: transparent;
+      color: #edf6fa;
+      &:hover {
+        background: #4995ba;
+      }
+    }
+    img.Avatar {
+      border: 1px solid #fff;
+    }
+  }
+}
+
+

@@ -66,13 +66,15 @@ System.register('romanzpolski/shawTheme/listInline', ['flarum/extend', 'flarum/C
 });;
 'use strict';
 
-System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/components/Post', 'flarum/Component', 'flarum/components/Page', 'flarum/components/HeaderSecondary', 'flarum/components/SessionDropdown', 'flarum/components/Dropdown', 'flarum/components/IndexPage', 'flarum/helpers/listItems', 'flarum/utils/ItemList', 'flarum/components/Button', 'flarum/components/LinkButton', 'flarum/components/SelectDropdown', 'flarum/tags/helpers/tagLabel', 'flarum/tags/utils/sortTags', 'flarum/tags/components/TagsPage', 'flarum/helpers/humanTime', 'flarum/helpers/icon', 'flarum/helpers/avatar', 'flarum/helpers/username', 'romanzpolski/shawTheme/listInline'], function (_export, _context) {
+System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/app', 'flarum/components/Post', 'flarum/Component', 'flarum/components/Page', 'flarum/components/HeaderSecondary', 'flarum/components/SessionDropdown', 'flarum/components/Dropdown', 'flarum/components/IndexPage', 'flarum/helpers/listItems', 'flarum/utils/ItemList', 'flarum/components/Button', 'flarum/components/LinkButton', 'flarum/components/SelectDropdown', 'flarum/tags/helpers/tagLabel', 'flarum/tags/utils/sortTags', 'flarum/tags/components/TagsPage', 'flarum/helpers/humanTime', 'flarum/helpers/icon', 'flarum/helpers/avatar', 'flarum/helpers/username', 'romanzpolski/shawTheme/listInline'], function (_export, _context) {
     "use strict";
 
-    var extend, Post, Component, Page, HeaderSecondary, SessionDropdown, Dropdown, IndexPage, listItems, ItemList, Button, LinkButton, SelectDropdown, tagLabel, sortTags, TagsPage, humanTime, icon, avatar, username, listInline;
+    var extend, app, Post, Component, Page, HeaderSecondary, SessionDropdown, Dropdown, IndexPage, listItems, ItemList, Button, LinkButton, SelectDropdown, tagLabel, sortTags, TagsPage, humanTime, icon, avatar, username, listInline;
     return {
         setters: [function (_flarumExtend) {
             extend = _flarumExtend.extend;
+        }, function (_flarumApp) {
+            app = _flarumApp.default;
         }, function (_flarumComponentsPost) {
             Post = _flarumComponentsPost.default;
         }, function (_flarumComponent) {
@@ -116,7 +118,7 @@ System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/compone
         }],
         execute: function () {
 
-            app.initializers.add('romanzpolski/shawTheme', function () {
+            app.initializers.add('romanzpolski/shawTheme', function (app) {
 
                 SessionDropdown.prototype.getButtonContent = function () {
                     var user = app.session.user;
@@ -283,8 +285,8 @@ System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/compone
                 };
 
                 IndexPage.prototype.view = function () {
-                    console.log(this.sidebarItems().toArray());
-                    //        console.log(this.viewItems().toArray());
+                    //console.log(this.sidebarItems().toArray());
+                    console.log(this.viewItems().toArray());
                     return m(
                         'div',
                         { className: 'IndexPage' },

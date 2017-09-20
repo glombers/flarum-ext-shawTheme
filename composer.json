@@ -1,5 +1,6 @@
 {
   "name": "romanzpolski/flarum-ext-shawTheme",
+  "title": "Shaw Academy",
   "description": "Custom Theme for Shaw Academy",
   "type": "flarum-extension",
   "require": {
