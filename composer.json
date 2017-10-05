@@ -15,5 +15,15 @@
         "color": "#fff"
       }
     }
+  },
+  "autoload": {
+    "psr-4": {
+      "romanzpolski\\shawtheme\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "romanzpolski\\shawtheme\\": "src/"
+    }
   }
 }

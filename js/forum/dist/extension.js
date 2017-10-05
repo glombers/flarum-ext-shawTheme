@@ -66,10 +66,10 @@ System.register('romanzpolski/shawTheme/listInline', ['flarum/extend', 'flarum/C
 });;
 'use strict';
 
-System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/app', 'flarum/components/Post', 'flarum/Component', 'flarum/components/Page', 'flarum/components/HeaderSecondary', 'flarum/components/SessionDropdown', 'flarum/components/Dropdown', 'flarum/components/IndexPage', 'flarum/helpers/listItems', 'flarum/utils/ItemList', 'flarum/components/Button', 'flarum/components/LinkButton', 'flarum/components/SelectDropdown', 'flarum/tags/helpers/tagLabel', 'flarum/tags/utils/sortTags', 'flarum/tags/components/TagsPage', 'flarum/helpers/humanTime', 'flarum/helpers/icon', 'flarum/helpers/avatar', 'flarum/helpers/username', 'romanzpolski/shawTheme/listInline'], function (_export, _context) {
+System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/app', 'flarum/components/Post', 'flarum/Component', 'flarum/components/Page', 'flarum/components/TerminalPost', 'flarum/components/HeaderSecondary', 'flarum/components/HeaderPrimary', 'flarum/components/SessionDropdown', 'flarum/components/Dropdown', 'flarum/utils/DiscussionControls', 'flarum/components/DiscussionListItem', 'flarum/components/IndexPage', 'flarum/helpers/listItems', 'flarum/utils/ItemList', 'flarum/components/Button', 'flarum/helpers/highlight', 'flarum/components/LinkButton', 'flarum/utils/extractText', 'flarum/utils/abbreviateNumber', 'Reflar/gamification/components/AddHotnessSort', 'flarum/components/SelectDropdown', 'flarum/tags/helpers/tagLabel', 'flarum/tags/components/TagsPage', 'flarum/helpers/humanTime', 'flarum/helpers/icon', 'flarum/helpers/avatar', 'flarum/helpers/username', 'romanzpolski/shawTheme/listInline', 'flarum/tags/helpers/tagsLabel', 'flarum/tags/utils/sortTags', 'flarum/utils/string'], function (_export, _context) {
     "use strict";
 
-    var extend, app, Post, Component, Page, HeaderSecondary, SessionDropdown, Dropdown, IndexPage, listItems, ItemList, Button, LinkButton, SelectDropdown, tagLabel, sortTags, TagsPage, humanTime, icon, avatar, username, listInline;
+    var extend, app, Post, Component, Page, TerminalPost, HeaderSecondary, HeaderPrimary, SessionDropdown, Dropdown, DiscussionControls, DiscussionListItem, IndexPage, listItems, ItemList, Button, highlight, LinkButton, extractText, abbreviateNumber, AddHotnessFilter, SelectDropdown, tagLabel, TagsPage, humanTime, icon, avatar, username, listInline, tagsLabel, sortTags, truncate;
     return {
         setters: [function (_flarumExtend) {
             extend = _flarumExtend.extend;
@@ -81,12 +81,20 @@ System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/app', '
             Component = _flarumComponent.default;
         }, function (_flarumComponentsPage) {
             Page = _flarumComponentsPage.default;
+        }, function (_flarumComponentsTerminalPost) {
+            TerminalPost = _flarumComponentsTerminalPost.default;
         }, function (_flarumComponentsHeaderSecondary) {
             HeaderSecondary = _flarumComponentsHeaderSecondary.default;
+        }, function (_flarumComponentsHeaderPrimary) {
+            HeaderPrimary = _flarumComponentsHeaderPrimary.default;
         }, function (_flarumComponentsSessionDropdown) {
             SessionDropdown = _flarumComponentsSessionDropdown.default;
         }, function (_flarumComponentsDropdown) {
             Dropdown = _flarumComponentsDropdown.default;
+        }, function (_flarumUtilsDiscussionControls) {
+            DiscussionControls = _flarumUtilsDiscussionControls.default;
+        }, function (_flarumComponentsDiscussionListItem) {
+            DiscussionListItem = _flarumComponentsDiscussionListItem.default;
         }, function (_flarumComponentsIndexPage) {
             IndexPage = _flarumComponentsIndexPage.default;
         }, function (_flarumHelpersListItems) {
@@ -95,14 +103,20 @@ System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/app', '
             ItemList = _flarumUtilsItemList.default;
         }, function (_flarumComponentsButton) {
             Button = _flarumComponentsButton.default;
+        }, function (_flarumHelpersHighlight) {
+            highlight = _flarumHelpersHighlight.default;
         }, function (_flarumComponentsLinkButton) {
             LinkButton = _flarumComponentsLinkButton.default;
+        }, function (_flarumUtilsExtractText) {
+            extractText = _flarumUtilsExtractText.default;
+        }, function (_flarumUtilsAbbreviateNumber) {
+            abbreviateNumber = _flarumUtilsAbbreviateNumber.default;
+        }, function (_ReflarGamificationComponentsAddHotnessSort) {
+            AddHotnessFilter = _ReflarGamificationComponentsAddHotnessSort.default;
         }, function (_flarumComponentsSelectDropdown) {
             SelectDropdown = _flarumComponentsSelectDropdown.default;
         }, function (_flarumTagsHelpersTagLabel) {
             tagLabel = _flarumTagsHelpersTagLabel.default;
-        }, function (_flarumTagsUtilsSortTags) {
-            sortTags = _flarumTagsUtilsSortTags.default;
         }, function (_flarumTagsComponentsTagsPage) {
             TagsPage = _flarumTagsComponentsTagsPage.default;
         }, function (_flarumHelpersHumanTime) {
@@ -115,6 +129,12 @@ System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/app', '
             username = _flarumHelpersUsername.default;
         }, function (_romanzpolskiShawThemeListInline) {
             listInline = _romanzpolskiShawThemeListInline.default;
+        }, function (_flarumTagsHelpersTagsLabel) {
+            tagsLabel = _flarumTagsHelpersTagsLabel.default;
+        }, function (_flarumTagsUtilsSortTags) {
+            sortTags = _flarumTagsUtilsSortTags.default;
+        }, function (_flarumUtilsString) {
+            truncate = _flarumUtilsString.truncate;
         }],
         execute: function () {
 
@@ -285,12 +305,22 @@ System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/app', '
                 };
 
                 IndexPage.prototype.view = function () {
-                    //console.log(this.sidebarItems().toArray());
-                    console.log(this.viewItems().toArray());
                     return m(
                         'div',
                         { className: 'IndexPage' },
-                        this.hero(),
+                        m(
+                            'div',
+                            { className: 'row fakeHeaderNav' },
+                            m(
+                                'div',
+                                { className: 'container' },
+                                m(
+                                    'ul',
+                                    { className: 'IndexPage-toolbar-view' },
+                                    listItems(this.viewItems().toArray())
+                                )
+                            )
+                        ),
                         m(
                             'div',
                             { className: 'container' },
@@ -306,22 +336,138 @@ System.register('romanzpolski/shawTheme/main', ['flarum/extend', 'flarum/app', '
                             m(
                                 'div',
                                 { className: 'IndexPage-results sideNavOffset' },
-                                m(
-                                    'div',
-                                    { className: 'IndexPage-toolbar' },
-                                    m(
-                                        'ul',
-                                        { className: 'IndexPage-toolbar-view kutas' },
-                                        listItems(this.viewItems().toArray())
-                                    ),
-                                    m(
-                                        'ul',
-                                        { className: 'IndexPage-toolbar-action' },
-                                        listItems(this.actionItems().toArray())
-                                    )
-                                ),
                                 app.cache.discussionList.render()
                             )
+                        )
+                    );
+                };
+
+                HeaderSecondary.prototype.view = function () {
+                    return m(
+                        'ul',
+                        { className: 'Header-controls' },
+                        listItems(this.items().toArray())
+                    );
+                };
+
+                DiscussionListItem.prototype.view = function () {
+                    var _this2 = this;
+
+                    var retain = this.subtree.retain();
+
+                    if (retain) return retain;
+
+                    var discussion = this.props.discussion;
+                    var startPost = discussion.startPost();
+                    var excerpt = m(
+                        'span',
+                        null,
+                        truncate(startPost.contentPlain(), 200)
+                    );
+                    var startUser = discussion.startUser();
+                    var isUnread = discussion.isUnread();
+                    var isRead = discussion.isRead();
+                    var showUnread = !this.showRepliesCount() && isUnread;
+                    var jumpTo = Math.min(discussion.lastPostNumber(), (discussion.readNumber() || 0) + 1);
+                    var relevantPosts = this.props.params.q ? discussion.relevantPosts() : [];
+                    var controls = DiscussionControls.controls(discussion, this).toArray();
+                    var attrs = this.attrs();
+                    var lastPost = !this.showStartPost();
+                    var user = discussion[lastPost ? 'lastUser' : 'startUser']();
+                    var time = discussion[lastPost ? 'lastTime' : 'startTime']();
+
+                    var tags = this.props.discussion.tags();
+
+                    //console.log(discussion);
+                    return m(
+                        'div',
+                        attrs,
+                        m(
+                            'a',
+                            { className: 'Slidable-underneath Slidable-underneath--left Slidable-underneath--elastic' + (isUnread ? '' : ' disabled'),
+                                onclick: this.markAsRead.bind(this) },
+                            icon('check')
+                        ),
+                        m(
+                            'div',
+                            { className: 'DiscussionListItem-content Slidable-content' + (isUnread ? ' unread' : '') + (isRead ? ' read' : '') },
+                            m(
+                                'ul',
+                                { className: 'DiscussionListItem-badges badges' },
+                                listItems(discussion.badges().toArray())
+                            ),
+                            m(
+                                'a',
+                                { href: startUser ? app.route.user(startUser) : '#',
+                                    className: 'DiscussionListItem-author',
+                                    title: extractText(app.translator.trans('core.forum.discussion_list.started_text', { user: startUser, ago: humanTime(discussion.startTime()) })),
+                                    config: function config(element) {
+                                        $(element).tooltip({ placement: 'right' });
+                                        m.route.apply(this, arguments);
+                                    } },
+                                avatar(startUser, { title: '' })
+                            ),
+                            m(
+                                'p',
+                                { className: 'postedBy' },
+                                'Posted by ',
+                                startUser.data.attributes.displayName
+                            ),
+                            m(
+                                'a',
+                                { href: app.route.discussion(discussion, jumpTo),
+                                    config: m.route,
+                                    className: 'DiscussionListItem-main' },
+                                m(
+                                    'h3',
+                                    { className: 'DiscussionListItem-title' },
+                                    highlight(discussion.title(), this.props.params.q)
+                                )
+                            ),
+                            m(
+                                'p',
+                                { className: 'ListDiscussion-excerpt' },
+                                excerpt,
+                                ' ',
+                                m(
+                                    'a',
+                                    { href: app.route.discussion(discussion, jumpTo) },
+                                    '(more)'
+                                )
+                            ),
+                            relevantPosts && relevantPosts.length ? m(
+                                'div',
+                                { className: 'DiscussionListItem-relevantPosts' },
+                                relevantPosts.map(function (post) {
+                                    return PostPreview.component({ post: post, highlight: _this2.props.params.q });
+                                })
+                            ) : ''
+                        ),
+                        m(
+                            'div',
+                            { className: 'row DiscussionListItem-bottomMeta' },
+                            m(
+                                'span',
+                                { className: 'DiscussionListItem-count',
+                                    onclick: this.markAsRead.bind(this),
+                                    title: showUnread ? app.translator.trans('core.forum.discussion_list.mark_as_read_tooltip') : '' },
+                                abbreviateNumber(discussion[showUnread ? 'unreadCount' : 'repliesCount']()),
+                                ' answers | last updated ',
+                                humanTime(time)
+                            ),
+                            ' \xA0',
+                            m(
+                                'span',
+                                { className: 'tags' },
+                                tagsLabel(tags),
+                                ' '
+                            ),
+                            controls.length ? Dropdown.component({
+                                icon: 'ellipsis-h',
+                                children: controls,
+                                className: 'DiscussionListItem-controls',
+                                buttonClassName: 'Button Button--icon Button--flat Slidable-underneath Slidable-underneath--right'
+                            }) : ''
                         )
                     );
                 };
